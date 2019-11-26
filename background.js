@@ -1,8 +1,7 @@
 browser.pageAction.onClicked.addListener((tab) => {
   browser.pageAction.hide(tab.id);
-  browser.tabs.update({url: tab.url + "archive"});
-  
-});
-
-browser.pageAction.onClicked.addListener(function () {
+  var url = new URL(tab.url)
+  // var domain = url.hostname
+  var fullURL = browser.runtime.getURL(url.origin);
+  browser.tabs.update({ url: fullURL + "/archive" });
 });
